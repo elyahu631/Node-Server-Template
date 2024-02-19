@@ -7,8 +7,6 @@ interface EmailOptions {
   email: string;
   subject: string;
   message: string;
-  // Optionally, if you want to support HTML emails:
-  // html?: string;
 }
 
 const sendEmail = async (options: EmailOptions): Promise<void> => {
@@ -28,8 +26,6 @@ const sendEmail = async (options: EmailOptions): Promise<void> => {
     to: options.email,
     subject: options.subject,
     text: options.message,
-    // Optionally, for HTML emails:
-    // html: options.html,
   };
 
   // Send the email using the configured transporter
