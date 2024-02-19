@@ -12,7 +12,6 @@ process.on('uncaughtException', (err: Error) => {
   process.exit(1); // Exit process immediately
 });
 
-// Assuming 'app' is an Express application. You might need to adjust the import based on your setup
 import app from './app';
 
 connectDB(databaseURL);
