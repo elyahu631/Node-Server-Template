@@ -11,7 +11,6 @@ interface CustomRequest extends Request {
   user?: any; // Assuming 'user' is added to the request object by middleware. Define a more specific type according to your user object structure.
 }
 
-// get the current user's profile
 export const getMe = (req: CustomRequest, res: Response, next: NextFunction) => {
   if (req.user) {
     req.params.id = req.user.id;
@@ -19,7 +18,6 @@ export const getMe = (req: CustomRequest, res: Response, next: NextFunction) => 
   next();
 };
 
-// Update the current user's information
 export const updateMe = catchAsync(async (req: CustomRequest, res: Response) => {
   if (req.user) {
     const updatedUser = await updateUserDetails(req.user.id, req.body);

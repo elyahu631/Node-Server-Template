@@ -52,7 +52,7 @@ export const createOne = (modelName: string) =>
 
 export const getAll = (modelName: string) =>
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    // Type assertion here
+
     const queryString = req.query as Record<string, string | undefined>;
 
     const features = new APIFeatures(DataAccess.getModel(modelName).find(), queryString)
@@ -61,8 +61,7 @@ export const getAll = (modelName: string) =>
       .limitFields()
       .paginate();
 
-    const doc = await features.query.exec(); // Ensure to call `.exec()` to execute the query
-
+    const doc = await features.query.exec(); 
     res.status(200).json({
       status: 'success',
       results: doc.length,

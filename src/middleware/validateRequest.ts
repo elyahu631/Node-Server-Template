@@ -1,6 +1,7 @@
 // validations/validateRequest.ts
+
 import { Request, Response, NextFunction } from 'express';
-import { Schema } from 'joi'; // Import the Schema type from Joi
+import { Schema } from 'joi'; 
 
 // Middleware for validating request data with a Joi schema
 const validateRequest = (schema: Schema) => (req: Request, res: Response, next: NextFunction) => {

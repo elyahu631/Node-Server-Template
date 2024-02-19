@@ -5,14 +5,13 @@ import DataAccess from '../dataBase/dataAccess';
 import APIFeatures from '../utils/apiFeatures';
 
 interface QueryObject {
-  [key: string]: any; // Adjust according to your query object structure
+  [key: string]: any; 
 }
 
-// You might need to adjust the types based on your actual model and request query structure
 export const executeQueryWithFeatures = async (
   modelName: string,
   queryObject: QueryObject,
-  reqQuery: Record<string, any> // Assuming this structure, adjust as needed
+  reqQuery: Record<string, any> 
 ) => {
   const model = DataAccess.getModel(modelName);
   const features = new APIFeatures(model.find(queryObject), reqQuery)

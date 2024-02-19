@@ -37,7 +37,6 @@ router.get('/logout', logoutController);
 router.post('/forgotPassword', forgotPasswordController);
 router.patch('/resetPassword/:token', resetPasswordController);
 
-// Protect all routes after this middleware
 router.use(protect);
 
 // Routes for updating user's password and managing user's own profile
@@ -46,7 +45,6 @@ router.get('/me', getMe, getUser);
 router.patch('/updateMe', validateRequest(updateUserValidationSchema), updateMe);
 router.delete('/deleteMe', deleteMe);
 
-// Restrict following routes to admin users
 router.use(restrictTo('admin'));
 
 // Routes for managing all users

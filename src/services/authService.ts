@@ -30,7 +30,6 @@ const createTokenSendResponse = (user: IUser, statusCode: number, res: Response)
 
   res.cookie('jwt', token, cookieOptions);
 
-  // Prepare user object for response, explicitly omitting the password
   const userForResponse: Partial<IUser> = { ...user.toObject(), password: undefined };
 
   res.status(statusCode).json({
@@ -82,11 +81,11 @@ export const authenticate = async (req: Request, next: NextFunction): Promise<IU
   }
 
   const decoded = await verifyToken(token);
-  if (!decoded) { // Check if 'decoded' is not null
+  if (!decoded) { 
     return next(new AppError('Invalid token or token expired', 401));
   }
 
-  return await getUserAndCheck(decoded, next); // Now 'decoded' is guaranteed to be of type 'DecodedToken'
+  return await getUserAndCheck(decoded, next); 
 };
 
 export const optionallyAuthenticate = async (req: Request): Promise<IUser | null> => {
@@ -132,13 +131,11 @@ export const logout = (res: Response): Response => {
   return res.status(200).json({ status: 'success' });
 };
 
-// Import DataAccess, IUser, AppError, sendEmail, userModel as necessary
-
 export const forgotPassword = async (
   email: string,
   req: Request,
   next: NextFunction
-): Promise<{ status: string; message: string } | void> => { // Changed return type
+): Promise<{ status: string; message: string } | void> => { 
 
   const user = await DataAccess.findOneByConditions<IUser>(userModel, { email });
   if (!user) {

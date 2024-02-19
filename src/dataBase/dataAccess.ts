@@ -1,8 +1,7 @@
 // dataBase/dataAccess.ts
 
 import mongoose, { Document, Model } from 'mongoose';
-import AppError from '../utils/appError'; // Assuming AppError is also converted to TypeScript
-
+import AppError from '../utils/appError';
 class DataAccess {
   private static instance: DataAccess;
 
@@ -49,20 +48,18 @@ class DataAccess {
     populateOptions?: string | string[] | mongoose.PopulateOptions | mongoose.PopulateOptions[]
   ): Promise<T | null> {
     const Model = this.getModel<T>(modelName);
-    let query: any = Model.findById(id); // Use 'any' to bypass strict type checking
-  
+    let query: any = Model.findById(id);
     if (populateOptions) {
-      // Since 'query' is typed as 'any', this bypasses the TypeScript errors
       query = query.populate(populateOptions);
     }
-  
-    const document = await query.exec(); // 'query' as 'any' allows calling 'exec()' without type errors
+    
+    const document = await query.exec();
     if (!document) {
       throw new AppError('No document found with that ID', 404);
     }
     return document;
   }
-  
+
   public async updateById<T extends Document>(
     modelName: string,
     id: string,
