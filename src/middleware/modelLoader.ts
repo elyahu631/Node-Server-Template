@@ -3,7 +3,10 @@
 import fs from 'fs';
 import path from 'path';
 
-const loadModels = (modelsPath: string): void => {
+const loadModels = (relativePath: string = '../models'): void => {
+
+  const modelsPath = path.join(__dirname, relativePath);
+
   fs.readdirSync(modelsPath).forEach(file => {
     if (path.extname(file) === '.js' || path.extname(file) === '.ts') {
       require(path.join(modelsPath, file));
@@ -12,3 +15,4 @@ const loadModels = (modelsPath: string): void => {
 };
 
 export default loadModels;
+

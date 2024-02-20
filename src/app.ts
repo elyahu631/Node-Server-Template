@@ -1,5 +1,4 @@
 // app.ts
-import path from 'path';
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -9,7 +8,6 @@ import mongoSanitize from 'express-mongo-sanitize';
 import hpp from 'hpp';
 import cookieParser from 'cookie-parser';
 import { vars } from './config/vars';
-
 import AppError from './utils/appError';
 import globalErrorHandler from './middleware/errorMiddleware';
 import allRoutes from './routes/index';
@@ -18,8 +16,6 @@ const app = express();
 app.use(cors());
 
 // 1) GLOBAL MIDDLEWARES
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, '../public')));
 
 // Set security HTTP headers using the Helmet middleware
 app.use(helmet());
@@ -63,16 +59,14 @@ app.use(
 );
 
 // Test middleware to add a timestamp to the request object
-// app.use((req: Request, res: Response, next: NextFunction) => {
-//   req.requestTime = new Date().toISOString();
-//   next();
-// });
+app.use((req: Request, res: Response, next: NextFunction) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
 
 // Loading the models for the application.
 import loadModels from './middleware/modelLoader';
-
-const modelsPath = path.join(__dirname, 'models');
-loadModels(modelsPath);
+loadModels();
 
 // 2) ROUTES
 app.use('/api/v1', allRoutes);

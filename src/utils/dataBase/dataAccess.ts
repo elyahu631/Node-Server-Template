@@ -1,7 +1,7 @@
-// dataBase/dataAccess.ts
+// utils/dataBase/dataAccess.ts
 
 import mongoose, { Document, Model } from 'mongoose';
-import AppError from '../utils/appError';
+import AppError from '../appError';
 class DataAccess {
   private static instance: DataAccess;
 
@@ -52,7 +52,7 @@ class DataAccess {
     if (populateOptions) {
       query = query.populate(populateOptions);
     }
-    
+
     const document = await query.exec();
     if (!document) {
       throw new AppError('No document found with that ID', 404);

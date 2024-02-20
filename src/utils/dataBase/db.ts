@@ -1,8 +1,10 @@
-// dataBase/db.ts
+// utils/dataBase/db.ts
 
 import mongoose from 'mongoose';
+import { vars } from '../../config/vars';
+const { databaseURL } = vars;
 
-export const connectDB = async (databaseURL: string): Promise<void> => {
+export const connectDB = async (): Promise<void> => {
   try {
     await mongoose.connect(databaseURL);
     console.log('DB connection successful!');

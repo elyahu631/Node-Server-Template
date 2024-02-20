@@ -2,8 +2,8 @@
 
 import jwt from 'jsonwebtoken';
 import AppError from '../utils/appError';
-import DataAccess from '../dataBase/dataAccess';
-import sendEmail from '../utils/email';
+import DataAccess from '../utils/dataBase/dataAccess';
+import sendEmail from '../config/email';
 import crypto from 'crypto';
 import { Request, Response, NextFunction } from 'express';
 import { IUser } from '../models/userModel';
@@ -62,7 +62,7 @@ const getUserAndCheck = async (decoded: DecodedToken, next: NextFunction): Promi
   }
 
   const currentUser = await DataAccess.findById<IUser>(userModel, decoded.id);
-  
+
   if (!currentUser) {
     throw new AppError('The user belonging to this token does no longer exist.', 401);
   }
@@ -81,11 +81,11 @@ export const authenticate = async (req: Request, next: NextFunction): Promise<IU
   }
 
   const decoded = await verifyToken(token);
-  if (!decoded) { 
+  if (!decoded) {
     return next(new AppError('Invalid token or token expired', 401));
   }
 
-  return await getUserAndCheck(decoded, next); 
+  return await getUserAndCheck(decoded, next);
 };
 
 export const optionallyAuthenticate = async (req: Request): Promise<IUser | null> => {
@@ -135,7 +135,7 @@ export const forgotPassword = async (
   email: string,
   req: Request,
   next: NextFunction
-): Promise<{ status: string; message: string } | void> => { 
+): Promise<{ status: string; message: string } | void> => {
 
   const user = await DataAccess.findOneByConditions<IUser>(userModel, { email });
   if (!user) {
@@ -202,7 +202,7 @@ export const updateUserPassword = async (
 ): Promise<void> => {
 
   const user = await DataAccess.findOneByConditions<IUser>(userModel, { _id: userId }, '+password');
-  
+
   if (!user || !(await user.correctPassword(currentPassword))) {
     throw new AppError('Your current password is wrong.', 401);
   }

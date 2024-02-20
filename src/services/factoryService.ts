@@ -2,7 +2,7 @@
 
 import catchAsync from '../utils/catchAsync';
 import APIFeatures from '../utils/apiFeatures';
-import DataAccess from '../dataBase/dataAccess';
+import DataAccess from '../utils/dataBase/dataAccess';
 
 import { Request, Response, NextFunction } from 'express';
 
@@ -39,8 +39,8 @@ export const createOne = (modelName: string) =>
     });
   });
 
- 
-  export const getOne = (modelName: ModelName, popOptions?: any) =>
+
+export const getOne = (modelName: ModelName, popOptions?: any) =>
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const doc = await DataAccess.findById(modelName, req.params.id, popOptions);
 
@@ -61,7 +61,7 @@ export const getAll = (modelName: string) =>
       .limitFields()
       .paginate();
 
-    const doc = await features.query.exec(); 
+    const doc = await features.query.exec();
     res.status(200).json({
       status: 'success',
       results: doc.length,

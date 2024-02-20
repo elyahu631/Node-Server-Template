@@ -1,9 +1,9 @@
 // server.ts
 
-import { connectDB } from './dataBase/db';
+import { connectDB } from './utils/dataBase/db';
 import { vars } from './config/vars';
 
-const { port, databaseURL } = vars;
+const { port } = vars;
 
 // Handling uncaught exceptions at the top level
 process.on('uncaughtException', (err: Error) => {
@@ -14,7 +14,7 @@ process.on('uncaughtException', (err: Error) => {
 
 import app from './app';
 
-connectDB(databaseURL);
+connectDB();
 
 // Starting the server
 const server = app.listen(port, () => {

@@ -1,6 +1,6 @@
 // services/userService.js
 
-import DataAccess from '../dataBase/dataAccess';
+import DataAccess from '../utils/dataBase/dataAccess';
 import AppError from '../utils/appError';
 import { filterObj } from '../services/helperService';
 
@@ -9,12 +9,12 @@ interface UserUpdateBody {
   email?: string;
   password?: string;
   passwordConfirm?: string;
-  [key: string]: any; 
+  [key: string]: any;
 }
 
 // update user details, excluding password updates.
 export const updateUserDetails = async (userId: string, body: UserUpdateBody) => {
-  
+
   // 1) Check for password fields to avoid updates through this route
   if (body.password || body.passwordConfirm) {
     throw new AppError('This route is not for password updates. Please use /updateMyPassword.', 400);
