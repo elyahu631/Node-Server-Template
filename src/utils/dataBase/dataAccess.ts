@@ -2,6 +2,7 @@
 
 import mongoose, { Document, Model } from 'mongoose';
 import AppError from '../appError';
+
 class DataAccess {
   private static instance: DataAccess;
 

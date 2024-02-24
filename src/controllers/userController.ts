@@ -8,7 +8,7 @@ import { deactivateUser, updateUserDetails } from '../services/userService';
 const userModel = 'User';
 
 interface CustomRequest extends Request {
-  user?: any; // Assuming 'user' is added to the request object by middleware. Define a more specific type according to your user object structure.
+  user?: any; 
 }
 
 export const getMe = (req: CustomRequest, res: Response, next: NextFunction) => {

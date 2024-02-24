@@ -48,9 +48,14 @@ router.delete('/deleteMe', deleteMe);
 router.use(restrictTo('admin'));
 
 // Routes for managing all users
-router.route('/').get(getAllUsers).post(createUser);
+router.route('/')
+  .get(getAllUsers)
+  .post(createUser);// todo --> create the logic here
 
 // Routes for getting, updating, and deleting a specific user by ID
-router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
+router.route('/:id')
+  .get(getUser)
+  .patch(validateRequest(updateUserValidationSchema), updateUser)
+  .delete(deleteUser);
 
 export default router;

@@ -6,7 +6,7 @@ import DataAccess from '../utils/dataBase/dataAccess';
 import sendEmail from '../config/email';
 import crypto from 'crypto';
 import { Request, Response, NextFunction } from 'express';
-import { IUser } from '../models/userModel';
+import { IUser } from '../types/user.interface';
 import { vars } from '../config/vars';
 
 const { jwtSecret, jwtExpiresIn, jwtCookieExpiresIn, nodeEnv } = vars;

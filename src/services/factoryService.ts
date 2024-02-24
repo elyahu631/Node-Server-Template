@@ -6,7 +6,6 @@ import DataAccess from '../utils/dataBase/dataAccess';
 
 import { Request, Response, NextFunction } from 'express';
 
-type ModelName = string;
 
 export const deleteOne = (modelName: string) =>
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
@@ -40,7 +39,7 @@ export const createOne = (modelName: string) =>
   });
 
 
-export const getOne = (modelName: ModelName, popOptions?: any) =>
+export const getOne = (modelName: string, popOptions?: any) =>
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const doc = await DataAccess.findById(modelName, req.params.id, popOptions);
 

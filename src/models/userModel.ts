@@ -1,25 +1,12 @@
 // models/userModel.ts
 
 import crypto from 'crypto';
-import mongoose, { Document, Schema, Query } from 'mongoose';
+import mongoose, {Schema, Query } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
+import { IUser } from '../types/user.interface';
 
-export interface IUser extends Document {
-  name: string;
-  email: string;
-  photo?: string;
-  role: 'user' | 'admin';
-  password: string;
-  passwordConfirm?: string;
-  passwordChangedAt?: Date;
-  passwordResetToken?: string;
-  passwordResetExpires?: Date;
-  active: boolean;
-  correctPassword(candidatePassword: string): Promise<boolean>;
-  changedPasswordAfter(JWTTimestamp: number): boolean;
-  createPasswordResetToken(): string;
-}
+
 
 const userSchema = new Schema<IUser>({
   name: {
