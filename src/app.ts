@@ -69,7 +69,7 @@ import loadModels from './middlewares/modelLoader';
 loadModels();
 
 // 2) ROUTES
-app.use('/api/v1', allRoutes);
+app.use('/api', allRoutes);
 
 // 3) HANDLE UNHANDLED ROUTES
 app.all('*', (req: Request, res: Response, next: NextFunction) => {
