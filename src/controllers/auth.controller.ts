@@ -1,4 +1,4 @@
-// controllers/authController.ts
+// controllers/auth.controller.ts
 
 import { Request, Response, NextFunction } from 'express';
 import catchAsync from '../utils/catchAsync';

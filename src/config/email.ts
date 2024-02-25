@@ -1,5 +1,4 @@
 // config/email.ts
-// config/email.ts
 import nodemailer from 'nodemailer';
 import { vars } from './vars';
 

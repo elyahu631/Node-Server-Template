@@ -10,7 +10,7 @@ import {
   createUser,
   updateUser,
   deleteMe,
-} from '../controllers/userController';
+} from '../controllers/user.controller';
 import {
   signupController,
   loginController,
@@ -20,13 +20,13 @@ import {
   updatePasswordController,
   protect,
   restrictTo,
-} from '../controllers/authController';
+} from '../controllers/auth.controller';
 import {
   registerValidationSchema,
   updateUserValidationSchema,
   changePasswordValidationSchema,
 } from '../validations/userValidations';
-import validateRequest from '../middleware/validateRequest';
+import validateRequest from '../middlewares/validateRequest';
 
 const router = express.Router();
 

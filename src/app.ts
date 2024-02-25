@@ -9,7 +9,7 @@ import hpp from 'hpp';
 import cookieParser from 'cookie-parser';
 import { vars } from './config/vars';
 import AppError from './utils/appError';
-import globalErrorHandler from './middleware/errorMiddleware';
+import globalErrorHandler from './middlewares/errorMiddleware';
 import allRoutes from './routes/index';
 
 const app = express();
@@ -65,7 +65,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // Loading the models for the application.
-import loadModels from './middleware/modelLoader';
+import loadModels from './middlewares/modelLoader';
 loadModels();
 
 // 2) ROUTES
