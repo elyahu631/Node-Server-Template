@@ -13,3 +13,7 @@ services:
     environment:
       - NODE_ENV=development
     command: npm run dev
+
+# docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+# docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v 
