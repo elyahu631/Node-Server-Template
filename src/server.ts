@@ -1,4 +1,4 @@
-// server.ts
+// src/server.ts
 
 import { connectDB } from './utils/dataBase/db';
 import { vars } from './config/vars';
